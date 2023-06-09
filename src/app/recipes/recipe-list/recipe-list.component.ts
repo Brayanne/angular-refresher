@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 
 import { Recipe } from '../recipe.model';
 
@@ -8,7 +8,13 @@ import { Recipe } from '../recipe.model';
   styleUrls: ['./recipe-list.component.css']
 })
 export class RecipeListComponent {
+  @Output() recipeWasSelected = new EventEmitter<Recipe>();
   recipes: Recipe[] = [
-    new Recipe('A test recipe', 'this is simply a test', 'https://www.comedera.com/wp-content/uploads/2018/12/chiles-en-nogada.jpg')
+    new Recipe('A test recipe', 'this is simply a test', 'https://www.comedera.com/wp-content/uploads/2018/12/chiles-en-nogada.jpg'),
+    new Recipe('Another test recipe', 'this is simply a test', 'https://www.comedera.com/wp-content/uploads/2018/12/chiles-en-nogada.jpg')
   ];
+
+  onRecipeSelected(recipe: Recipe){
+    this.recipeWasSelected.emit(recipe);
+  }
 }
